@@ -42,6 +42,8 @@ public class Console extends JFrame implements KeyListener, ActionListener{
 	JMenu menucomm = new JMenu("Commands");
 	JMenu menuview = new JMenu("View");
 	JMenu menuhelp = new JMenu("Help");
+	JMenu menuabout = new JMenu("About");
+	JMenuItem test = new JMenuItem("test");
 	JMenuItem export = new JMenuItem("Exportation");
 	JMenuItem script = new JMenuItem("Script Input");
 	JMenuItem mindterm = new JMenuItem("Mindterm");
@@ -92,6 +94,7 @@ public class Console extends JFrame implements KeyListener, ActionListener{
 		menubar.add(menucomm);
 		menubar.add(menuview);
 		menubar.add(menuhelp);
+		menubar.add(menuabout);
 
 		// File
 		menufile.add(export);
@@ -105,10 +108,12 @@ public class Console extends JFrame implements KeyListener, ActionListener{
 		menucomm.add(debug);
 		menucomm.add(info);
 		menucomm.add(term);
+		menuabout.add(test);
 		purge.addActionListener(this);
 		debug.addActionListener(this);
 		info.addActionListener(this);
 		term.addActionListener(this);
+		test.addActionListener(this);
 		// View
 		menuview.add(clear);
 		menuview.add(defaultCarat);
@@ -179,65 +184,72 @@ public class Console extends JFrame implements KeyListener, ActionListener{
 			} catch (IOException e1) { log.append("\nMindterm Download Failed: IOException"); }
 			log.append("\nMindterm Download Commenced.");
 		}
-		if (eventSource == purge) {
-			output.append("\n" + computername + "~ $ Command>Purge");
+		if (eventSource == test){
+			output.append("\n" + computername + "~ $ About>Test");
 			try {
-				ToolbarProc.purge();
-			} catch (IOException e1) { log.append("\nPurge Failed: IOException");}
-		}
-		if (eventSource == debug) {
-			output.append("\n" + computername + "~ $ Command>Debug");
-			try {
-				ToolbarProc.debug();
-			} catch (IOException e1) { log.append("\nBug JTextArea Export Failed: IOException"); }
-		}
-		if (eventSource == info){
-			output.append("\n" + computername + "~ $ Command>System Readout");
-			try {
-				ToolbarProc.info();
-			} catch (InterruptedException e1) { log.append("\nInformation Not Exported: InterruptedException");
-			} catch (IOException e1) { log.append("\nInformation Not Exported: IOException"); }
-		}
-		if (eventSource == clear){
-			ToolbarProc.clear();
-		}
-		if (eventSource == defaultCarat){
-			ConInfClass.append(computername + "~ $ View>Snap to Bottom");
-			ToolbarProc.defaultCarat();
-		}
-		// Needs Work
-		if (eventSource == viewswitch){
-			ConInfClass.append(computername + "~ $ View>Switch View");
-			// right now it doesn't do shit. it just sets the screen as starter. please rewrite this algorithm.
-		}
-		if (eventSource == del){
-			ConInfClass.append(computername + "~ $ View>Delete iUtilities Files");
-			try {
-				ToolbarProc.delete();
-			} catch (IOException e1) { log.append("\nDeletion Failed: IOException"); }
-		}
-		if (eventSource == term){
-			ConInfClass.append(computername + "~ $ Commands>Terminate Process");
-			ToolbarProc.term();
-		}
-		if (eventSource == about) {
-			ConInfClass.append(computername + "~ $ Help>About");
-			ToolbarProc.about();
-		}
-		if (eventSource == help){
-			try {
-				TextProc.help(null);
-			} catch (IOException e1) { log.append("\nHelp Invocation Failed: IOException"); }
-		}
-		if (eventSource == changelog){
-			ConInfClass.append(computername + "~ $ changelog");
-			try {
-				TextProc.changelog(null);
-			} catch (IOException e1) { log.append("Changelog Invocation Failed: IOException"); }
-		}
-		if (eventSource == updates){
-			ConInfClass.append(computername + "~ $ Help>Updates");
-			// Fix THIS
+				ToolbarProc.save();
+			} catch (IOException e1) { log.append("\nTEST");
+			}
+			if (eventSource == purge) {
+				output.append("\n" + computername + "~ $ Command>Purge");
+				try {
+					ToolbarProc.purge();
+				} catch (IOException e1) { log.append("\nPurge Failed: IOException");}
+			}
+			if (eventSource == debug) {
+				output.append("\n" + computername + "~ $ Command>Debug");
+				try {
+					ToolbarProc.debug();
+				} catch (IOException e1) { log.append("\nBug JTextArea Export Failed: IOException"); }
+			}
+			if (eventSource == info){
+				output.append("\n" + computername + "~ $ Command>System Readout");
+				try {
+					ToolbarProc.info();
+				} catch (InterruptedException e1) { log.append("\nInformation Not Exported: InterruptedException");
+				} catch (IOException e1) { log.append("\nInformation Not Exported: IOException"); }
+			}
+			if (eventSource == clear){
+				ToolbarProc.clear();
+			}
+			if (eventSource == defaultCarat){
+				ConInfClass.append(computername + "~ $ View>Snap to Bottom");
+				ToolbarProc.defaultCarat();
+			}
+			// Needs Work
+			if (eventSource == viewswitch){
+				ConInfClass.append(computername + "~ $ View>Switch View");
+				// right now it doesn't do shit. it just sets the screen as starter. please rewrite this algorithm.
+			}
+			if (eventSource == del){
+				ConInfClass.append(computername + "~ $ View>Delete iUtilities Files");
+				try {
+					ToolbarProc.delete();
+				} catch (IOException e1) { log.append("\nDeletion Failed: IOException"); }
+			}
+			if (eventSource == term){
+				ConInfClass.append(computername + "~ $ Commands>Terminate Process");
+				ToolbarProc.term();
+			}
+			if (eventSource == about) {
+				ConInfClass.append(computername + "~ $ Help>About");
+				ToolbarProc.about();
+			}
+			if (eventSource == help){
+				try {
+					TextProc.help(null);
+				} catch (IOException e1) { log.append("\nHelp Invocation Failed: IOException"); }
+			}
+			if (eventSource == changelog){
+				ConInfClass.append(computername + "~ $ changelog");
+				try {
+					TextProc.changelog(null);
+				} catch (IOException e1) { log.append("Changelog Invocation Failed: IOException"); }
+			}
+			if (eventSource == updates){
+				ConInfClass.append(computername + "~ $ Help>Updates");
+				// Fix THIS
+			}
 		}
 	}
 }
